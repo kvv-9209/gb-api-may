@@ -2,9 +2,11 @@ package ru.gb.gbapimay.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import ru.gb.gbapimay.security.validation.FieldMatch;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -16,6 +18,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@FieldMatch(firstFieldName = "password", secondFieldName = "matchingPassword", message = "The passwords must match")
 public class UserDto {
     @JsonIgnore
     private Long id;
@@ -26,6 +29,9 @@ public class UserDto {
     @NotBlank
     @Size(min = 8, message = "password length must be grater than 8 symbols")
     private String password;
+    @NotNull(message = "is required")
+    @Size(min = 8, message = "password length must be grater than 8 symbols")
+    private String matchingPassword;
     @NotBlank
     private String firstname;
     @NotBlank
@@ -34,6 +40,6 @@ public class UserDto {
     @NotBlank
     private String email;
     @NotBlank
-    @Size(min = 5)
+    @Size(min = 5, max = 20)
     private String phone;
 }
