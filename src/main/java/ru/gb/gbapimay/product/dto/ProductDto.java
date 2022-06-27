@@ -1,6 +1,7 @@
 package ru.gb.gbapimay.product.dto;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.gb.gbapimay.category.dto.CategoryDto;
 import ru.gb.gbapimay.common.enums.Status;
 
@@ -23,6 +24,7 @@ public class ProductDto {
     @Digits(integer = 6, fraction = 2)
     private BigDecimal cost;
     @PastOrPresent
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate manufactureDate;
     @NotNull
     private Status status;
